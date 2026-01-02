@@ -1,0 +1,35 @@
+.page-content {
+  padding: 3rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-content h1,
+.page-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--charcoal);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-content h2 {
+  font-size: 2.2rem;
+  color: #d4af37;
+}
+
+/* Optional: Add spacing for paragraphs and lists */
+.page-content p,
+.page-content ul {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.page-content ul {
+  padding-left: 1.5rem;
+}
+
+.page-content li {
+  margin-bottom: 0.5rem;
+}
