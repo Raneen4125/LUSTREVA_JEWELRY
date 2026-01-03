@@ -1,0 +1,116 @@
+/* Services.css */
+.services-section {
+  background-color: #faf9f6; /* Warm off-white for luxury */
+  position: relative;
+  overflow: hidden;
+}
+
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4af3740, transparent);
+}
+
+.services-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0a0a0a;
+  position: relative;
+  margin-bottom: 2.2rem;
+  letter-spacing: 1px;
+}
+
+.services-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #d4af37, #b8860b);
+  margin: 0.8rem auto 0;
+  border-radius: 1px;
+}
+
+/* Service Card */
+.service-card {
+  border: none;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.12);
+  border-top: 2px solid #d4af37;
+}
+
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 175, 55, 0.06);
+  border-radius: 50%;
+  margin-bottom: 1.4rem;
+  transition: all 0.3s ease;
+  color: #d4af37;
+}
+
+.service-card:hover .icon-wrapper {
+  background: rgba(212, 175, 55, 0.12);
+  transform: scale(1.08);
+}
+
+.service-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+.title{
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 15px;
+}
+.service-text {
+  font-family: 'Montserrat', sans-serif;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services-heading {
+    font-size: 2rem;
+  }
+
+  .service-card {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .icon-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .service-title {
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,29 @@
+.product-details {
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.product-details img {
+  width: 300px;
+  margin: 20px auto;
+  display: block;
+}
+.product-details h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+.product-details p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+.product-details ul {
+  text-align: left;
+  max-width: 600px;
+  margin: 20px auto;
+  padding-left: 20px;
+}
+.product-details select {
+  padding: 10px;
+  margin: 10px 0;
+}

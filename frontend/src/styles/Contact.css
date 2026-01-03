@@ -1,0 +1,64 @@
+/* Contact.css */
+.contact-container {
+  background: linear-gradient(135deg, #dbdfc2 0%, #c6c6b7 100%); /* Subtle gradient background */
+  border-radius: 15px;
+  
+  
+  padding: 2rem;
+}
+.text-center{
+    text-align: center;
+    margin-top: 7px;
+    margin-bottom: 20px;
+color: #d4a017;
+}
+.text-centers{
+    color: #d4a017;
+    text-align: center;
+}
+
+
+.contact-info, .contact-form {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect */
+}
+
+
+
+
+.contact-icon {
+  margin-right: 10px;
+  color: #0a0a0b; /* Bootstrap primary color */
+  font-size: 1.2rem;
+}
+
+.contact-item a {
+  color: #1e79db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+
+.contact-btn {
+  background: linear-gradient(45deg, #10130a, #0d0f04);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Animation keyframes */
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 1rem;
+  }
+  .contact-info, .contact-form {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,119 @@
+.footer-elegant {
+  background-color: #6b4e3d;
+  color: #f0f0f0;
+  padding: 2.5rem 0 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  border-top: 1px solid #333;
+}
+
+.footer-content {
+  align-items: center;
+}
+
+.footer-section {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-section:first-child { text-align: left; }
+  .footer-section:last-child { text-align: right; }
+}
+
+.footer-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #f4e6e8;
+  margin-bottom: 0.8rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+@media (min-width: 768px) {
+  .social-links { justify-content: flex-start; }
+}
+
+.social-link { color: #bbb; transition: color 0.3s; }
+.social-link:hover { color: #f4e6e8; }
+
+.newsletter-text { color: #ccc; margin-bottom: 0.8rem; }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .input-group {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.8rem;
+  }
+}
+
+.newsletter-input {
+  background-color: #181818;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 300px;
+}
+.newsletter-input::placeholder { color: #777; }
+.newsletter-input:focus {
+  outline: none;
+  border-color: #f4e6e8;
+  box-shadow: 0 0 0 0.2rem rgba(244, 230, 232, 0.2);
+}
+
+.newsletter-button {
+  background-color: #f4e6e8;
+  color: #6b4e3d;
+  border: none;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.newsletter-button:hover {
+  background-color: #e0d5c9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.alert-message {
+  margin-top: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 300px;
+}
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.15);
+  border: 1px solid #28a745;
+  color: #a3d9a5;
+}
+.alert-error {
+  background-color: rgba(220, 53, 69, 0.15);
+  border: 1px solid #dc3545;
+  color: #f8b2b8;
+}
+
+.footer-divider {
+  border-color: #333;
+  opacity: 0.5;
+  margin: 1.5rem 0;
+}
+.footer-copyright {
+  color: #aaa;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+}
