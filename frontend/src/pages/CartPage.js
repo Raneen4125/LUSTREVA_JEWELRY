@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import '../styles/PageLayout.css';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const CartPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState('');

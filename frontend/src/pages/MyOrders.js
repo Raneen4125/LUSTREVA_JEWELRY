@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import '../styles/PageLayout.css';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const MyOrders = () => {
       }
 
       try {
-        const response = await fetch('${API_URL}/orders', {
+        const response = await fetch('http://localhost:5000/orders', {
           headers: { Authorization: `Bearer ${token}` },
         });
 

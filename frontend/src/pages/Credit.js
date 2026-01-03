@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import '../styles/Credit.css';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Credit = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

@@ -11,7 +11,6 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCreditCard, FaMoneyBillWave, FaPhone, FaBuilding } from 'react-icons/fa';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const OrderConfirmation = () => {
   const [formData, setFormData] = useState({
@@ -178,7 +177,7 @@ const handleSubmit = async (e) => {
     };
     
     // Send to backend - token is now validated
-    const response = await fetch('${API_URL}/orders', {
+    const response = await fetch('http://localhost:5000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const Wishlist = () => {
       }
       
       try {
-        const res = await fetch('${API_URL}/wishlist', {
+        const res = await fetch('http://localhost:5000/wishlist', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -42,7 +42,7 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (item_id) => {
     const token = localStorage.getItem('token');
-    await fetch(`${API_URL}/wishlist/${item_id}`, {
+    await fetch(`http://localhost:5000/wishlist/${item_id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });

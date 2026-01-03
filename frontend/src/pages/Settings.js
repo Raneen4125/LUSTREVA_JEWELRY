@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaShieldAlt, FaSignOutAlt, FaEdit } from 'react-icons/fa';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Settings = () => {
   const [userData, setUserData] = useState({
     name: '',

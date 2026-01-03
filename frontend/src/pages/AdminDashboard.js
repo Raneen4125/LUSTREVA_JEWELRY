@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminDashboard.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const checkAdmin = async () => {
       try {
-        const response = await fetch('${API_URL}/admin/jewelry', {
+        const response = await fetch('http://localhost:5000/admin/jewelry', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

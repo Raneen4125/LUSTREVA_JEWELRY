@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/About.css';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 // Import your images
 import about1 from '../assets/about1.jpg'; 
 import about2 from '../assets/about2.jpg'; 

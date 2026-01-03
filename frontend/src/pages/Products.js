@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import '../styles/PageLayout.css';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const Products = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ const Products = () => {
     const token = localStorage.getItem('token');
     if (!token) return;
     
-    fetch(`${API_URL}/wishlist/check/${item_id}`, {
+    fetch(`http://localhost:5000/wishlist/check/${item_id}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
     .then(r => r.json())
@@ -38,7 +38,7 @@ const Products = () => {
   }
   
   try {
-    const response = await fetch('${API_URL}/wishlist', {
+    const response = await fetch('http://localhost:5000/wishlist', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ const Products = () => {
   useEffect(() => {
     const fetchJewelry = async () => {
       try {
-        const response = await fetch('${API_URL}/jewelry');
+        const response = await fetch('http://localhost:5000/jewelry');
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setItems(data);
