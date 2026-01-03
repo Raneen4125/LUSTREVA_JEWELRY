@@ -57,13 +57,15 @@ const db = mysql.createPool({
   port: process.env.MYSQLPORT,
 });
 
-db.connect((err) => {
+db.query("SELECT 1", (err) => {
   if (err) {
-    console.error("Database connection failed:", err);
-    process.exit(1);
+    console.error("❌ MySQL connection failed:", err.message);
+  } else {
+    console.log("✅ MySQL connected successfully");
   }
-  console.log("✅ Connected to MySQL database.");
 });
+
+
 
 // Handle fatal errors (just log and exit for development)
 db.on('error', (err) => {
