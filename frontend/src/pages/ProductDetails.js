@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import '../styles/PageLayout.css';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch('http://localhost:5000/jewelry');
+        const response = await fetch('${API_URL}/jewelry');
         if (!response.ok) throw new Error('Failed to fetch products');
         const items = await response.json();
         const productId = parseInt(id, 10);
@@ -53,7 +53,7 @@ const ProductDetails = () => {
       if (!token) return;
       
       try {
-        const res = await fetch(`http://localhost:5000/wishlist/check/${product.id}`, {
+        const res = await fetch(`${API_URL}/wishlist/check/${product.id}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
@@ -93,8 +93,8 @@ const handleWishlist = async () => {
   setLoadingWishlist(true);
   try {
     const url = inWishlist 
-      ? `http://localhost:5000/wishlist/${product.id}`
-      : 'http://localhost:5000/wishlist';
+      ? `${API_URL}/wishlist/${product.id}`
+      : '${API_URL}/wishlist';
     
     const method = inWishlist ? 'DELETE' : 'POST';
     const body = inWishlist ? null : JSON.stringify({ item_id: product.id });

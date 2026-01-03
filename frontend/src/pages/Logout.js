@@ -1,7 +1,7 @@
 // src/components/Logout.js
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 const Logout = () => {
   const navigate = useNavigate();
 

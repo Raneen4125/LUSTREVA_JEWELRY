@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 import '../styles/Footer.css';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
@@ -27,7 +27,7 @@ const Footer = () => {
   }
 
   try {
-    const response = await fetch('http://localhost:5000/newsletter/subscribe', {
+    const response = await fetch('${API_URL}/newsletter/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -7,6 +7,7 @@ import { FaBars, FaTimes , FaShoppingCart} from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { FaHeart } from 'react-icons/fa';
 import '../styles/NavbarComponent.css';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const NavbarComponent = ({ onLoginRequired }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:5000/wishlist', {
+      const res = await fetch('${API_URL}/wishlist', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {

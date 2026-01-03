@@ -8,7 +8,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { FaGem, FaCertificate, FaShieldAlt, FaShippingFast } from 'react-icons/fa';
 import '../styles/PageLayout.css';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 // Keep your local assets
 import modelImage from '../assets/model.jpg';
 import insta1 from '../assets/image.png';

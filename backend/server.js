@@ -50,10 +50,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 // MySQL connection - SIMPLE VERSION (no reconnection logic)
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "jewelry"
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "jewelry",
+  port: process.env.DB_PORT || 3306
 });
 
 db.connect((err) => {

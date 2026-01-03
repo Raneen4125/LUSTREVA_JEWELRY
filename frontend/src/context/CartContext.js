@@ -1,6 +1,6 @@
-
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
@@ -12,6 +12,44 @@ export const CartProvider = ({ children, requireLogin }) => {
 
   const getToken = () => localStorage.getItem('token');
 
+  // 🔥 Backend helper functions
+  const addToCartBackend = async (item) => {
+    const token = getToken();
+    if (!token) return;
+    
+    try {
+      await fetch(`${API_URL}/cart/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          item_id: item.id,
+          quantity: item.quantity || 1
+        })
+      });
+    } catch (err) {
+      console.error('Backend cart add failed:', err);
+    }
+  };
+
+  const removeFromCartBackend = async (item_id) => {
+    const token = getToken();
+    if (!token) return;
+    
+    try {
+      await fetch(`${API_URL}/cart/${item_id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    } catch (err) {
+      console.error('Backend cart remove failed:', err);
+    }
+  };
+
   const fetchCart = useCallback(async () => {
     const token = getToken();
     setIsGuest(!token);
@@ -19,8 +57,8 @@ export const CartProvider = ({ children, requireLogin }) => {
 
     try {
       if (token) {
-        // Authenticated user - fetch from backend
-        const response = await fetch('http://localhost:5000/cart', {
+        // ✅ Use API_URL here
+        const response = await fetch(`${API_URL}/cart`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -31,7 +69,6 @@ export const CartProvider = ({ children, requireLogin }) => {
           setCartItems([]);
         }
       } else {
-        // Guest user - fetch from localStorage
         const savedCart = localStorage.getItem('guestCart');
         if (savedCart) {
           setCartItems(JSON.parse(savedCart));
@@ -47,21 +84,18 @@ export const CartProvider = ({ children, requireLogin }) => {
     }
   }, []);
 
-  // Initialize cart on mount
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
 
-    useEffect(() => {
+  useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === 'token') {
-        fetchCart(); // Refresh cart when token changes
+        fetchCart();
       }
     };
 
     window.addEventListener('storage', handleStorageChange);
-    
-    // Also check for direct localStorage changes
     const checkTokenInterval = setInterval(() => {
       if (getToken() !== localStorage.getItem('token')) {
         fetchCart();
@@ -73,7 +107,7 @@ export const CartProvider = ({ children, requireLogin }) => {
       clearInterval(checkTokenInterval);
     };
   }, [fetchCart]);
-  // Save guest cart to localStorage
+
   useEffect(() => {
     if (!getToken() && cartItems.length > 0) {
       localStorage.setItem('guestCart', JSON.stringify(cartItems));
@@ -82,85 +116,85 @@ export const CartProvider = ({ children, requireLogin }) => {
     }
   }, [cartItems]);
 
-  // Add to cart function
-
-const addToCart = async (item) => {
-  const token = getToken();
-
-  setCartItems(prev => {
-    // 1. Check if the item already exists in the cart
-    const existingItem = prev.find(i => (i.id === item.id || i.item_id === item.id));
-
-    let updatedCart;
-    if (existingItem) {
-      // 2. If it exists, create a new array with the incremented quantity
-      updatedCart = prev.map(i =>
-        (i.id === item.id || i.item_id === item.id)
-          ? { ...i, quantity: (i.quantity || 1) + 1 }
-          : i
-      );
-    } else {
-      // 3. If it's new, add it with quantity 1
-      const newItem = {
-        id: item.id,
-        item_id: item.id,
-        name: item.name,
-        price: item.price,
-        image_data: item.image_data,
-        quantity: 1
-      };
-      updatedCart = [...prev, newItem];
-    }
-
-    // 4. Save the updated version to backup storage
-    localStorage.setItem('guestCart', JSON.stringify(updatedCart));
-    return updatedCart;
-  });
-
-  
-};
-
-  // Remove from cart
-  // Update item quantity
-const updateQuantity = (index, newQuantity) => {
-  const token = getToken();
-  
-  // Prevent invalid quantities
-  if (newQuantity < 1) {
-    removeFromCart(index); // Remove if quantity < 1
-    return;
-  }
-
-  setCartItems(prev => {
-    const updatedCart = [...prev];
-    updatedCart[index] = { ...updatedCart[index], quantity: newQuantity };
-    
-    // Save to localStorage for guest users
-    if (!token && updatedCart.length > 0) {
-      localStorage.setItem('guestCart', JSON.stringify(updatedCart));
-    } else if (!token) {
-      localStorage.removeItem('guestCart');
-    }
-    
-    return updatedCart;
-  });
-
-  // 🔜 Optional: Sync with backend if logged in (see note below)
-};
-  const removeFromCart = (index) => {
+  // ✅ Fixed addToCart with backend sync
+  const addToCart = async (item) => {
     const token = getToken();
-    if (!token) {
-      // Guest user
-      const newCart = cartItems.filter((_, i) => i !== index);
-      setCartItems(newCart);
+
+    setCartItems(prev => {
+      const existingItem = prev.find(i => (i.id === item.id || i.item_id === item.id));
+      let updatedCart;
+      
+      if (existingItem) {
+        updatedCart = prev.map(i =>
+          (i.id === item.id || i.item_id === item.id)
+            ? { ...i, quantity: (i.quantity || 1) + 1 }
+            : i
+        );
+      } else {
+        const newItem = {
+          id: item.id,
+          item_id: item.id,
+          name: item.name,
+          price: item.price,
+          image_ item.image_data,
+          quantity: 1
+        };
+        updatedCart = [...prev, newItem];
+      }
+
+      if (!token && updatedCart.length > 0) {
+        localStorage.setItem('guestCart', JSON.stringify(updatedCart));
+      }
+      return updatedCart;
+    });
+
+    // 🔥 Sync with backend for authenticated users
+    if (token) {
+      addToCartBackend({ ...item, quantity: 1 });
+    }
+  };
+
+  const updateQuantity = (index, newQuantity) => {
+    const token = getToken();
+    
+    if (newQuantity < 1) {
+      removeFromCart(index);
       return;
     }
 
-    // Authenticated user - you can implement backend removal here
-    setCartItems(prev => prev.filter((_, i) => i !== index));
+    setCartItems(prev => {
+      const updatedCart = [...prev];
+      updatedCart[index] = { ...updatedCart[index], quantity: newQuantity };
+      
+      if (!token && updatedCart.length > 0) {
+        localStorage.setItem('guestCart', JSON.stringify(updatedCart));
+      } else if (!token) {
+        localStorage.removeItem('guestCart');
+      }
+      return updatedCart;
+    });
+
+    // Optional: Add backend sync for quantity updates
   };
 
-  // Clear cart
+  const removeFromCart = (index) => {
+    const token = getToken();
+    const itemToRemove = cartItems[index];
+    
+    setCartItems(prev => prev.filter((_, i) => i !== index));
+
+    if (token) {
+      removeFromCartBackend(itemToRemove.item_id || itemToRemove.id);
+    } else {
+      const newCart = cartItems.filter((_, i) => i !== index);
+      if (newCart.length > 0) {
+        localStorage.setItem('guestCart', JSON.stringify(newCart));
+      } else {
+        localStorage.removeItem('guestCart');
+      }
+    }
+  };
+
   const clearCart = () => {
     const token = getToken();
     if (!token) {
@@ -169,13 +203,11 @@ const updateQuantity = (index, newQuantity) => {
     setCartItems([]);
   };
 
-  // Checkout function
   const checkout = () => {
     if (!getToken()) {
       requireLogin('/cart');
       return;
     }
-    // Proceed with checkout
   };
 
   return (
@@ -184,7 +216,7 @@ const updateQuantity = (index, newQuantity) => {
         cart: cartItems, 
         addToCart, 
         removeFromCart,
-         updateQuantity, 
+        updateQuantity, 
         clearCart,
         checkout,
         loading,
