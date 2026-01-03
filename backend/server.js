@@ -49,23 +49,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 // MySQL connection - SIMPLE VERSION (no reconnection logic)
-const db = mysql.createPool({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT,
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "jewelry"
 });
 
-db.query("SELECT 1", (err) => {
+db.connect((err) => {
   if (err) {
-    console.error("❌ MySQL connection failed:", err.message);
-  } else {
-    console.log("✅ MySQL connected successfully");
+    console.error("Database connection failed:", err);
+    process.exit(1);
   }
+  console.log("✅ Connected to MySQL database.");
 });
-
-
 
 // Handle fatal errors (just log and exit for development)
 db.on('error', (err) => {
