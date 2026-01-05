@@ -30,7 +30,7 @@ const Wishlist = () => {
         if (res.ok) {
           const data = await res.json();
           setWishlist(data);
-        }c
+        }
       } catch (err) {
         console.error(err);
       } finally {
