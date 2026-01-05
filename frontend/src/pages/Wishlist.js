@@ -30,7 +30,7 @@ const Wishlist = () => {
         if (res.ok) {
           const data = await res.json();
           setWishlist(data);
-        }
+        }c
       } catch (err) {
         console.error(err);
       } finally {
@@ -38,7 +38,7 @@ const Wishlist = () => {
       }
     };
     fetchWishlist();
-  }, [navigate]);
+  }, [navigate]); 
 
   const removeFromWishlist = async (item_id) => {
     const token = localStorage.getItem('token');
