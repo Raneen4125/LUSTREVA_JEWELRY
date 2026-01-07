@@ -1,8 +1,7 @@
 
 # 💎 Lustreva Jewelry Website
 
-![Jewelry Website](https://via.placeholder.com/800x400?text=Lustreva+Jewelry+Website)
-
+(https://raneen4125.github.io/LUSTREVA_JEWELRY/)
 An elegant e-commerce website for a luxury jewelry store featuring wishlist functionality, admin panel, and secure checkout.
 
 ## 🌟 Features
