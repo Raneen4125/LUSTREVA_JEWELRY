@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 💎 Lustreva Jewelry Website
 
 ![Jewelry Website](https://via.placeholder.com/800x400?text=Lustreva+Jewelry+Website)
@@ -83,10 +83,8 @@ Backend: http://localhost:5000
 🚀 Admin Access
 Default Admin Account:
 
-Email: admin@lustreva.com (update this in your database)
-Password: Set during signup, then promote to admin via phpMyAdmin
-=======
-*(Replace with your actual backend Render link once deployed)*
+Email: admin@lustreva.com 
+password:admin123
 
 ---
 
